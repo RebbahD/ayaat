@@ -126,4 +126,25 @@ class QuranApiService {
       throw Exception('Error fetching verse: $e');
     }
   }
+  /// Fetches list of all Surahs
+  Future<List<dynamic>> getSurahs(AppLanguage language) async {
+    final langService = LanguageService();
+    // Default to English (en.sahih) for metadata if not arabic, as it has englishName
+    // But for names we might want specific editions. 
+    // The meta endpoint is better: https://api.alquran.cloud/v1/surah
+    // It returns all surahs with englishName, name (Arabic), number, numberOfAyahs.
+    
+    try {
+      final response = await http.get(Uri.parse('$_baseUrl/surah'));
+
+      if (response.statusCode == 200) {
+        final json = jsonDecode(response.body);
+        return json['data'] as List<dynamic>;
+      } else {
+        throw Exception('Failed to load surahs');
+      }
+    } catch (e) {
+      throw Exception('Error fetching surahs: $e');
+    }
+  }
 }

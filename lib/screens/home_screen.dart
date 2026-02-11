@@ -6,6 +6,7 @@ import '../services/notification_service.dart';
 import '../services/quran_api.dart';
 import 'settings_screen.dart';
 import 'verse_detail_screen.dart';
+import 'surah_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -182,6 +183,43 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Stack(
         alignment: Alignment.center,
         children: [
+          // Quran Button - LEFT
+          Positioned(
+            left: 0,
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SurahListScreen(),
+                    ),
+                  );
+                },
+                borderRadius: BorderRadius.circular(50),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.menu_book, color: Color(0xFFFFD700), size: 24),
+                      const SizedBox(height: 2),
+                      Text(
+                        _currentLanguage == AppLanguage.arabic ? 'المصحف' : 'Mushaf',
+                        style: GoogleFonts.amiri(
+                          fontSize: 10,
+                          color: const Color(0xFFFFD700),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+          
           // Centered App Title
           Center(
             child: Text(

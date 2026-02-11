@@ -171,11 +171,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   String _getDevelopedBy() {
     switch (_currentLanguage) {
       case AppLanguage.arabic:
-        return '';
+        return 'جميع الحقوق محفوظة لضياء رباح';
       case AppLanguage.english:
-        return '';
+        return 'All rights reserved to Dhiaa Rebbah';
       case AppLanguage.french:
-        return '';
+        return 'Tous droits réservés à Dhiaa Rebbah';
     }
   }
 
@@ -778,6 +778,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                     _currentLanguage == AppLanguage.arabic
                                     ? TextDirection.rtl
                                     : TextDirection.ltr,
+                              ),
+                              const SizedBox(height: 16),
+                              // Developed By
+                              Text(
+                                _getDevelopedBy(),
+                                style: GoogleFonts.amiri(
+                                  fontSize: 12,
+                                  color: Colors.white38,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
                               const SizedBox(height: 16),
                               // Duaa message

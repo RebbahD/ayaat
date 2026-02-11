@@ -6,13 +6,13 @@ import '../services/language_service.dart';
 
 class VerseDetailScreen extends StatefulWidget {
   final int surahNumber;
-  final int numberInSurah;
+  final int? numberInSurah;
   final AppLanguage language;
 
   const VerseDetailScreen({
     super.key,
     required this.surahNumber,
-    required this.numberInSurah,
+    this.numberInSurah,
     required this.language,
   });
 
@@ -76,12 +76,14 @@ class _VerseDetailScreenState extends State<VerseDetailScreen> {
 
         // Find target verse index
         _targetVerseIndex = null;
-        for (int i = 0; i < _verses.length; i++) {
-          if (_verses[i]['numberInSurah'] == widget.numberInSurah) {
-            _targetVerseIndex = i;
-            _verseKeys[i] = GlobalKey();
-            debugPrint('✓ Target verse ${widget.numberInSurah} at index $i');
-            break;
+        if (widget.numberInSurah != null) {
+          for (int i = 0; i < _verses.length; i++) {
+            if (_verses[i]['numberInSurah'] == widget.numberInSurah) {
+              _targetVerseIndex = i;
+              _verseKeys[i] = GlobalKey();
+              debugPrint('✓ Target verse ${widget.numberInSurah} at index $i');
+              break;
+            }
           }
         }
 
