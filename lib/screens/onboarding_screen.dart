@@ -229,6 +229,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
     // Save notification preferences
     if (_wantsNotifications && _notificationTimes.isNotEmpty) {
+      // Save notification mode explicitly
+      await _notificationService.setNotificationMode(
+        _usePrayerTimes ? 'prayer' : 'manual',
+      );
       await _notificationService.scheduleMultipleDaily(_notificationTimes);
     } else {
       await _notificationService.cancelAll();
