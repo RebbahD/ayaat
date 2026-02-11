@@ -9,7 +9,8 @@ import 'verse_detail_screen.dart';
 import 'surah_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final int? initialVerseNumber;
+  const HomeScreen({super.key, this.initialVerseNumber});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -31,6 +32,15 @@ class _HomeScreenState extends State<HomeScreen> {
     _loadVerses();
   }
 
+  @override
+  void didUpdateWidget(HomeScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.initialVerseNumber != oldWidget.initialVerseNumber &&
+        widget.initialVerseNumber != null) {
+      _loadVerses();
+    }
+  }
+
   Future<void> _loadLanguage() async {
     final language = await _languageService.getCurrentLanguage();
     setState(() {
@@ -45,6 +55,19 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     try {
+      // Priority 1: Check validation from constructor (passed from notification tap)
+      if (widget.initialVerseNumber != null) {
+        final verses = await _quranApi.getVerseInAllLanguages(
+          widget.initialVerseNumber!,
+        );
+        setState(() {
+          _currentVerses = verses;
+          _isLoading = false;
+        });
+        return;
+      }
+
+      // Priority 2: Check stored notification verse (legacy/fallback)
       final notificationVerse = await _notificationService
           .getNotificationVerse();
       if (notificationVerse != null) {

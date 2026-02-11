@@ -47,6 +47,7 @@ class _AppEntryPointState extends State<AppEntryPoint> {
   final NotificationService _notificationService = NotificationService();
   bool _isLoading = true;
   bool _showOnboarding = true;
+  int? _targetVerseNumber;
 
   @override
   void initState() {
@@ -63,6 +64,7 @@ class _AppEntryPointState extends State<AppEntryPoint> {
       if (mounted) {
         // When notification is tapped, show HomeScreen with the notification verse
         setState(() {
+          _targetVerseNumber = verseNumber;
           _showOnboarding = false;
           _isLoading = false;
         });
@@ -71,6 +73,19 @@ class _AppEntryPointState extends State<AppEntryPoint> {
   }
 
   Future<void> _checkAppState() async {
+    // Check if app was launched from notification
+    final launchVerseNumber = await _notificationService.getLaunchVerseNumber();
+    if (launchVerseNumber != null) {
+      if (mounted) {
+        setState(() {
+          _targetVerseNumber = launchVerseNumber;
+          _showOnboarding = false;
+          _isLoading = false;
+        });
+      }
+      return;
+    }
+
     final notificationVerse = await _notificationService.getNotificationVerse();
     final isComplete = await _notificationService.isOnboardingComplete();
 
@@ -103,6 +118,8 @@ class _AppEntryPointState extends State<AppEntryPoint> {
       );
     }
 
-    return _showOnboarding ? const OnboardingScreen() : const HomeScreen();
+    return _showOnboarding
+        ? const OnboardingScreen()
+        : HomeScreen(initialVerseNumber: _targetVerseNumber);
   }
 }

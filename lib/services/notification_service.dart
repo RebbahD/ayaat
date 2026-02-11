@@ -246,6 +246,24 @@ class NotificationService {
     }
   }
 
+  /// Check if the app was launched by tapping a notification
+  Future<int?> getLaunchVerseNumber() async {
+    final launchDetails =
+        await _notifications.getNotificationAppLaunchDetails();
+    
+    if (launchDetails?.didNotificationLaunchApp ?? false) {
+      final payload = launchDetails?.notificationResponse?.payload;
+      if (payload != null) {
+        try {
+          return int.parse(payload);
+        } catch (e) {
+          debugPrint('Error parsing launch payload: $e');
+        }
+      }
+    }
+    return null;
+  }
+
   /// Schedule multiple daily notifications at specified times
   Future<bool> scheduleMultipleDaily(List<TimeOfDay> times) async {
     // Check notification permission first
