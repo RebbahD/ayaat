@@ -56,13 +56,17 @@
 ## 📸 Screenshots
 
 <p align="center">
+  <img src="assets/screenshot_welcome.png" width="200" alt="Welcome Screen" />
+  &nbsp;&nbsp;
   <img src="assets/screenshot_home.png" width="200" alt="Home Screen" />
   &nbsp;&nbsp;
-  <img src="assets/screenshot_surah_list.png" width="200" alt="Surah List" />
-  &nbsp;&nbsp;
-  <img src="assets/screenshot_reader.png" width="200" alt="Quran Reader" />
-  &nbsp;&nbsp;
+  <img src="assets/screenshot_surah_list.png" width="200" alt="Full Mushaf" />
+</p>
+
+<p align="center">
   <img src="assets/screenshot_settings.png" width="200" alt="Settings Screen" />
+  &nbsp;&nbsp;
+  <img src="assets/screenshot_picker.png" width="200" alt="Time Picker" />
 </p>
 
 ---
