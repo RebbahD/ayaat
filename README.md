@@ -54,7 +54,14 @@
     *(Note: Location permissions are required for Prayer Times features)*
 
 ## 📸 Screenshots
-*(Embed screenshots of Home, Verse Detail, and Settings screens here)*
+
+<p align="center">
+  <img src="assets/screenshot_home.png" width="200" alt="Home Screen" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="assets/screenshot_settings.png" width="200" alt="Settings Screen" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="assets/screenshot_picker.png" width="200" alt="Premium Time Picker" />
+</p>
 
 ---
 Developed with ❤️ by **Dhiaa Rebbah**.
